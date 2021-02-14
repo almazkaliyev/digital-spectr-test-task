@@ -1,0 +1,53 @@
+@import './fonts';
+@import 'libs/normalize';
+@import 'components/all';
+
+html,
+body {
+  min-height: 100vh;
+  font-size: 16px;
+  background-color: #f7f8fb;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  min-width: 320px;
+}
+
+.quote {
+  position: relative;
+  margin: 1rem 1.5rem;
+  padding: 0.5rem;
+  font-style: italic;
+  color: rgba(16, 20, 25, 0.4);
+  border-left: 3px solid rgba(16, 20, 25, 0.1);
+}
+
+.presentational {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 1rem;
+
+  & label {
+    margin-right: 1rem;
+  }
+
+  & input {
+    flex-shrink: 0;
+    flex-grow: 1;
+    max-width: 70%;
+  }
+}

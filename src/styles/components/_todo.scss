@@ -1,0 +1,128 @@
+.todo {
+  width: 100%;
+  min-width: 320px;
+  max-width: 500px;
+  margin-bottom: 24px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 16px;
+    padding-right: 4px;
+    margin-bottom: 8px;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 400;
+    padding: 12px 0;
+    color: rgba(16, 20, 25, 0.8);
+  }
+
+  &__content {
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.12);
+    overflow: auto;
+  }
+
+  &__add-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px;
+    width: 100%;
+
+    &-input {
+      width: 100%;
+      border: none;
+      line-height: 24px;
+      font-size: 16px;
+      padding-left: 16px;
+      color: rgba(16, 20, 25, 0.8);
+
+      &::-webkit-input-placeholder {
+        color: rgba(16, 20, 25, 0.4);
+      }
+
+      &:-ms-input-placeholder {
+        color: rgba(16, 20, 25, 0.4);
+      }
+
+      &::placeholder {
+        color: rgba(16, 20, 25, 0.4);
+      }
+    }
+
+    &-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 4px;
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  }
+
+  &__list {
+    $self: &;
+    max-height: 80vh;
+    overflow-y: auto;
+    & #{$self} {
+      max-height: none;
+      margin-left: 24px;
+    }
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 3px;
+      background-color: #f5f5f5;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 3px;
+      background-color: #e7e7e7;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(46, 134, 171, 0.6);
+    }
+
+    &-item {
+      $self: &;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      &:last-child { border: none; }
+
+      &-text {
+        flex-grow: 1;
+        padding-left: 12px;
+        padding-right: 12px;
+        font-size: 16px;
+        line-height: 24px;
+        color: rgba(16, 20, 25, 0.92);
+        word-wrap: break-word;
+      }
+
+      &--completed {
+        background-color: rgba(0, 0, 0, 0.04);
+
+        #{$self}-text {
+          color: rgba(16, 20, 25, 0.4);
+          text-decoration: line-through;
+        }
+      }
+    }
+  }
+}

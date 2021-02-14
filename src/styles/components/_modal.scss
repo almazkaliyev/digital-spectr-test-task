@@ -1,0 +1,25 @@
+.modal {
+  position: relative;
+  padding: 0 1rem;
+  margin: 2rem auto;
+  min-width: 320px;
+  max-width: 500px;
+
+  &__content {
+    width: 100%;
+    background-color: #fff;
+    padding-top: 4px;
+    padding: 1.5rem;
+    border-radius: 4px;
+    box-shadow: 0px 6px 7px -4px rgba(0,0,0,0.2),0px 11px 15px 1px rgba(0,0,0,0.14),0px 4px 20px 3px rgba(0,0,0,0.12);
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 2rem;
+
+    & button { margin-left: 0.5rem; }
+  }
+}

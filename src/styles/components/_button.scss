@@ -1,0 +1,80 @@
+.button-base {
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.button {
+  @extend .button-base;
+
+  min-width: 4rem;
+  padding: 0.3rem 1rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.75;
+  color: rgba(0, 0, 0, 0.87);
+  text-transform: uppercase;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+  &:hover { background-color: #ccc; }
+  &:disabled {
+    pointer-events: none;
+    color: rgba(0, 0, 0, 0.48);
+    background-color: #eee;
+  }
+
+  &--primary {
+    background-color: #4caf50;
+    color: rgb(255, 255, 255);
+
+    &:hover { background-color: #388e3c; }
+  }
+
+  &--secondary {
+    background-color: #f44336;
+    color: rgba(255, 255, 255, 0.87);
+
+    &:hover { background-color: #d32f2f; }
+  }
+}
+
+.icon-button {
+  flex: 0 0 auto;
+  padding: 12px;
+  overflow: visible;
+  text-align: center;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  &--primary {
+    color: rgba(46, 134, 171, 0.92);
+
+    &:hover {
+      background-color: rgba(46, 134, 171, 0.04);
+    }
+  }
+
+  &--secondary {
+    color: rgba(16, 20, 25, 0.6);
+
+    &:hover {
+      background-color: rgba(16, 20, 25, 0.04);
+    }
+  }
+
+  &--disabled {
+    cursor: default;
+    pointer-events: none;
+    color: rgba(16, 20, 25, 0.2);
+  }
+}

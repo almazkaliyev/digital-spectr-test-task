@@ -1,3 +1,11 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
-export default (): React.ReactElement => <h1>Digital Spectr Hot</h1>;
+import TodoBlock from './components/TodoBlock';
+
+const App: React.FC = (): ReactElement => (
+  <div className="container">
+    <TodoBlock />
+  </div>
+);
+
+export default App;

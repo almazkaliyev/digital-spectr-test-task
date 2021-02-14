@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { openAddModal } from '../store/todo/actionCreators';
 import {
+  selectOptions,
   selectShowAddModal,
   selectShowDeleteModal,
   selectSortedItems,
@@ -17,6 +18,7 @@ import TodoList from './TodoList';
 
 const TodoBlock: React.FC = (): React.ReactElement => {
   const items = useSelector(selectSortedItems);
+  const options = useSelector(selectOptions);
   const dispatch = useDispatch();
   const showDeleteModal = useSelector(selectShowDeleteModal);
   const showAddModal = useSelector(selectShowAddModal);
@@ -42,7 +44,7 @@ const TodoBlock: React.FC = (): React.ReactElement => {
       </div>
       {showAddModal && (
         <Modal>
-          <TodoAddDialog />
+          <TodoAddDialog options={options} />
         </Modal>
       )}
       {showDeleteModal && (

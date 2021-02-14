@@ -10,39 +10,7 @@ import { TodoActions, TodoActionTypes } from './actionCreators';
 import { Todo, TodoState } from './contracts/state';
 
 const initialState: TodoState = {
-  items: [
-    {
-      id: '0',
-      text: '0',
-      completed: false,
-      subItems: [
-        { id: '1', text: '1', completed: false, subItems: [], parentId: '0' },
-        {
-          id: '2',
-          text: '2',
-          completed: false,
-          parentId: '0',
-          subItems: [
-            {
-              id: '3',
-              text: '3',
-              completed: false,
-              parentId: '2',
-              subItems: [],
-            },
-            {
-              id: '4',
-              text: '4',
-              completed: false,
-              parentId: '2',
-              subItems: [],
-            },
-          ],
-        },
-      ],
-    },
-    { id: '5', text: '5', completed: false, subItems: [] },
-  ],
+  items: [],
   currentItem: {} as Todo,
   showAddModal: false,
   showDeleteModal: false,

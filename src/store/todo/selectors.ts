@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import { sortTodoByCompleted } from '../../utils/helpers';
 import { RootState } from '../rootReducer';
 import { Todo, TodoState } from './contracts/state';
@@ -17,3 +16,14 @@ export const selectShowDeleteModal = (state: RootState): boolean =>
 
 export const selectShowAddModal = (state: RootState): boolean =>
   selectTodo(state).showAddModal;
+
+export const selectOptions = (state: RootState): Todo[] => {
+  let result: Todo[] = [];
+  selectItems(state).forEach((element) => {
+    result.push(element);
+    if (element.subItems) {
+      result = result.concat(element.subItems);
+    }
+  });
+  return result;
+};

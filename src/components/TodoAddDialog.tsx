@@ -24,7 +24,6 @@ const TodoAddDialog: React.FC<TodoAddDialogProps> = ({
       id: getNewId(),
       text: textInputValue.trim(),
       completed: false,
-      subItems: [],
     };
     if (parentId !== 'none') {
       todo.parentId = parentId;

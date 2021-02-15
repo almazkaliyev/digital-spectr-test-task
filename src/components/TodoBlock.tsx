@@ -7,7 +7,9 @@ import {
   selectOptions,
   selectShowAddModal,
   selectShowDeleteModal,
-  selectSortedItems,
+  selectSortedByCompletedItems,
+  selectSortedByCompletedSubItems1,
+  selectSortedByCompletedSubItems2,
 } from '../store/todo/selectors';
 import { IconButton } from './IconButton';
 import AddIcon from './icons/AddIcon';
@@ -17,7 +19,9 @@ import TodoDeleteDialog from './TodoDeleteDialog';
 import TodoList from './TodoList';
 
 const TodoBlock: React.FC = (): React.ReactElement => {
-  const items = useSelector(selectSortedItems);
+  const items = useSelector(selectSortedByCompletedItems);
+  const subItems1 = useSelector(selectSortedByCompletedSubItems1);
+  const subItems2 = useSelector(selectSortedByCompletedSubItems2);
   const options = useSelector(selectOptions);
   const dispatch = useDispatch();
   const showDeleteModal = useSelector(selectShowDeleteModal);
@@ -34,7 +38,11 @@ const TodoBlock: React.FC = (): React.ReactElement => {
         </div>
         <div className="todo__content">
           {items.length ? (
-            <TodoList items={items} />
+            <TodoList
+              items={items}
+              subItems1={subItems1}
+              subItems2={subItems2}
+            />
           ) : (
             <p className="quote">
               &quot;Big things have small beginnings.&quot; - Prometheus

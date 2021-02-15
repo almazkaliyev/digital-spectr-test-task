@@ -1,16 +1,57 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-param-reassign */
 import produce, { Draft } from 'immer';
 
-import {
-  addTodoDeeply,
-  removeTodoDeeply,
-  toggleTodoDeeply,
-} from '../../utils/helpers';
 import { TodoActions, TodoActionTypes } from './actionCreators';
 import { Todo, TodoState } from './contracts/state';
 
 const initialState: TodoState = {
-  items: [],
+  items: {
+    '8jp4eaxhvb': {
+      id: '8jp4eaxhvb',
+      text: 'Buy a new PC for work',
+      completed: true,
+    },
+    'bwr5kk7jne6': {
+      id: 'bwr5kk7jne6',
+      text: 'Learn TypeScript harder',
+      completed: true,
+    },
+    'ruq4rhbd9rk': {
+      id: 'ruq4rhbd9rk',
+      text: 'Send reminder to everyone',
+      completed: true,
+    },
+  },
+  subItems1: {
+    'eu6apekqfhl': {
+      id: 'eu6apekqfhl',
+      text: 'Generics',
+      completed: true,
+      parentId: 'bwr5kk7jne6',
+    },
+    'eu61zsekqfhl': {
+      id: 'eu61zsekqfhl',
+      text: 'TypeGuards',
+      completed: true,
+      parentId: 'bwr5kk7jne6',
+    },
+  },
+  subItems2: {
+    'abwr5kjne6': {
+      id: 'abwr5kjne6',
+      text: '2 Generics',
+      completed: true,
+      parentId: 'eu6apekqfhl',
+    },
+    'bc5kk7jne6': {
+      id: 'bc5kk7jne6',
+      text: '2 TypeGuards',
+      completed: true,
+      parentId: 'eu61zsekqfhl',
+    },
+  },
   currentItem: {} as Todo,
   showAddModal: false,
   showDeleteModal: false,
@@ -19,10 +60,19 @@ const initialState: TodoState = {
 export default produce(
   (draftState: Draft<TodoState>, action: TodoActions): void => {
     switch (action.type) {
-      case TodoActionTypes.ADD_TODO_ITEM:
+      case TodoActionTypes.ADD_TODO_ITEM: {
+        if (action.payload.parentId) {
+          if (draftState.items[action.payload.parentId]) {
+            draftState.subItems1[action.payload.id] = action.payload;
+          } else {
+            draftState.subItems2[action.payload.id] = action.payload;
+          }
+        } else {
+          draftState.items[action.payload.id] = action.payload;
+        }
         draftState.showAddModal = false;
-        addTodoDeeply(draftState.items, action.payload);
         break;
+      }
 
       case TodoActionTypes.DELETE_TODO_ITEM_REQUEST:
         draftState.showDeleteModal = true;
@@ -30,14 +80,65 @@ export default produce(
         break;
 
       case TodoActionTypes.DELETE_TODO_ITEM: {
-        removeTodoDeeply(draftState.items, draftState.currentItem.id);
+        const { id, parentId } = draftState.currentItem;
+        if (parentId) {
+          if (draftState.subItems1[id]) {
+            for (const subItem2 of Object.values(draftState.subItems2)) {
+              if (subItem2.parentId === id) {
+                delete draftState.subItems2[subItem2.id];
+              }
+            }
+            delete draftState.subItems1[id];
+          }
+          if (draftState.subItems2[id]) {
+            delete draftState.subItems2[id];
+          }
+        } else {
+          for (const subItem1 of Object.values(draftState.subItems1)) {
+            if (subItem1.parentId === id) {
+              for (const subItem2 of Object.values(draftState.subItems2)) {
+                if (subItem2.parentId === subItem1.id) {
+                  delete draftState.subItems2[subItem2.id];
+                }
+              }
+              delete draftState.subItems1[subItem1.id];
+            }
+          }
+          delete draftState.items[id];
+        }
         draftState.showDeleteModal = false;
         draftState.currentItem = {} as Todo;
         break;
       }
 
+      // FIXME: toggle parents when all children complete/uncomplete
       case TodoActionTypes.TOGGLE_TODO_ITEM: {
-        toggleTodoDeeply(draftState.items, action.payload.id);
+        const { id, parentId } = action.payload;
+        if (parentId) {
+          if (draftState.subItems1[id]) {
+            draftState.subItems1[id].completed = !draftState.subItems1[id].completed;
+            for (const subItem2 of Object.values(draftState.subItems2)) {
+              if (subItem2.parentId === id) {
+                draftState.subItems2[subItem2.id].completed = draftState.subItems1[id].completed;
+              }
+            }
+          }
+          if (draftState.subItems2[id]) {
+            draftState.subItems2[id].completed = !draftState.subItems2[id].completed;
+          }
+        } else {
+          draftState.items[id].completed = !draftState.items[id].completed;
+          for (const subItem1 of Object.values(draftState.subItems1)) {
+            if (subItem1.parentId === id) {
+              draftState.subItems1[subItem1.id].completed = draftState.items[id].completed;
+              for (const subItem2 of Object.values(draftState.subItems2)) {
+                if (subItem2.parentId === subItem1.id) {
+                  draftState.subItems2[subItem2.id].completed = draftState.items[id].completed;
+                }
+              }
+            }
+          }
+        }
         break;
       }
 

@@ -11,6 +11,6 @@
 - `$ yarn start` starts dev server
 - `$ yarn build` builds prod version of app into `build/`
 
-## Know issues
+## Known issues
 
 - parent doesn't toggle when add new child/uncompleted child

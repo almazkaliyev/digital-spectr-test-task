@@ -7,51 +7,9 @@ import { TodoActions, TodoActionTypes } from './actionCreators';
 import { Todo, TodoState } from './contracts/state';
 
 const initialState: TodoState = {
-  items: {
-    '8jp4eaxhvb': {
-      id: '8jp4eaxhvb',
-      text: 'Buy a new PC for work',
-      completed: true,
-    },
-    'bwr5kk7jne6': {
-      id: 'bwr5kk7jne6',
-      text: 'Learn TypeScript harder',
-      completed: true,
-    },
-    'ruq4rhbd9rk': {
-      id: 'ruq4rhbd9rk',
-      text: 'Send reminder to everyone',
-      completed: true,
-    },
-  },
-  subItems1: {
-    'eu6apekqfhl': {
-      id: 'eu6apekqfhl',
-      text: 'Generics',
-      completed: true,
-      parentId: 'bwr5kk7jne6',
-    },
-    'eu61zsekqfhl': {
-      id: 'eu61zsekqfhl',
-      text: 'TypeGuards',
-      completed: true,
-      parentId: 'bwr5kk7jne6',
-    },
-  },
-  subItems2: {
-    'abwr5kjne6': {
-      id: 'abwr5kjne6',
-      text: '2 Generics',
-      completed: true,
-      parentId: 'eu6apekqfhl',
-    },
-    'bc5kk7jne6': {
-      id: 'bc5kk7jne6',
-      text: '2 TypeGuards',
-      completed: true,
-      parentId: 'eu61zsekqfhl',
-    },
-  },
+  items: {},
+  subItems1: {},
+  subItems2: {},
   currentItem: {} as Todo,
   showAddModal: false,
   showDeleteModal: false,

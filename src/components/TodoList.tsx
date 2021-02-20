@@ -21,9 +21,18 @@ const TodoList: React.FC<TodoListProps> = ({
 }): React.ReactElement => {
   const dispatch = useDispatch();
 
-  const handleCompleteItem = (todo: Todo) => dispatch(toggleTodoItem(todo));
-  const handleDeleteItem = (todo: Todo) =>
-    dispatch(deleteTodoItemRequest(todo));
+  const handleCompleteItem = React.useCallback(
+    (todo: Todo) => dispatch(toggleTodoItem(todo)),
+    // dispatch doesn't changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+  const handleDeleteItem = React.useCallback(
+    (todo: Todo) => dispatch(deleteTodoItemRequest(todo)),
+    // dispatch doesn't changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   // TODO: DRY
   return (
